@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steen Papier Schaar</title>
+
+<!-- hier kan je de css aanpassen van het spel -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ffffff, #f8c703);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .game {
+        background: rgb(255, 252, 252);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 400px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .keuzes {
+        margin: 20px 0;
+    }
+
+    button {
+        padding: 15px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 12px;
+        font-size: 18px;
+        cursor: pointer;
+        background: #4facfe;
+        color: white;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #008afa;
+        transform: scale(1.05);
+    }
+
+    .resultaat {
+        margin-top: 25px;
+        font-size: 20px;
+        color: #222;
+    }
+
+    span {
+        font-weight: bold;
+        color: #000000;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="game">
+    <h1>✊ Steen Papier Schaar ✋</h1>
+
+    <div class="keuzes">
+        <button onclick="speel('steen')">✊ Steen</button>
+        <button onclick="speel('papier')">✋ Papier</button>
+        <button onclick="speel('schaar')">✌️ Schaar</button>
+    </div>
+
+    <div class="resultaat">
+        <p>Jij koos: <span id="speler">---</span></p>
+        <p>Computer koos: <span id="computer">---</span></p>
+        <h2 id="resultaat">---</h2>
+    </div>
+</div>
+
+<script>
+const keuzes = ["steen", "papier", "schaar"];
+
+function speel(spelerKeuze) {
+    const computerKeuze = keuzes[Math.floor(Math.random() * 3)];
+
+    document.getElementById("speler").textContent = spelerKeuze;
+    document.getElementById("computer").textContent = computerKeuze;
+
+    let resultaat = "";
+
+    if (spelerKeuze === computerKeuze) {
+        resultaat = "🤝 Gelijkspel!";
+    } 
+    else if (
+        (spelerKeuze === "steen" && computerKeuze === "schaar") ||
+        (spelerKeuze === "papier" && computerKeuze === "steen") ||
+        (spelerKeuze === "schaar" && computerKeuze === "papier")
+    ) {
+        resultaat = "🎉 Jij wint!";
+    } 
+    else {
+        resultaat = "😢 Computer wint!";
+    }
+
+    document.getElementById("resultaat").textContent = resultaat;
+}
+</script>
+
+</body>
+</html>
